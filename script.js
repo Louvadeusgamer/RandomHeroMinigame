@@ -177,16 +177,19 @@ for (let i = 0; i <= 5; i++) {
     })
 }
 
+console.log(lenRoles[0])
+
 const hasTwoTanks = (heroes) => {
     let tankQuantity = 0
     for (const hero of heroes) {
-        if (lenRoles[0] > hero)
+        if (lenRoles[0] > hero && hero !== -1)
             tankQuantity++
     }
-    if (tankQuantity >= 2)
+    if (tankQuantity >= 2) {
         return true
-    else
+    } else {
         return false
+    }
 }
 
 finishroundButton.addEventListener("click", () => {
@@ -232,13 +235,32 @@ nextroundButton.addEventListener("click", () => {
         
         let hero
 
-        if (roleElList[i].value == -1 || playerElList[i].value == "") {
+        if (roleElList[i].value == -1 || playerElList[i].value == "")
             continue
-        } else if (roleElList[i].value == 0) {
+        if (roleElList[i].value == 0) 
             hero = Math.floor(Math.random() * (lenRoles[0] + lenRoles[1] + lenRoles[2]))
+        else
+            hero = Math.floor(Math.random() * lenRoles[parseInt(roleElList[i].value)-1])
+
+        
+        console.log(`${i}: ${hero}`) // Arrumar herois repetidos no mesmo player
+        
+        if (heroList.includes(hero)) {
+            i--
+            console.log("repeated")
+            continue
+        } else if (hasTwoTanks(heroList) && roleElList[i].value == 0 && hero < lenRoles[0]) {
+            i--
+            console.log("has two tanks")
+            continue
+        } else {
+            heroList[i] = hero
+            console.log("setted hero")
+        }
+        
+        if (roleElList[i].value == 0) {
             heroElList[i].innerHTML += findHeroOQ(hero)
         } else {
-            hero = Math.floor(Math.random() * lenRoles[parseInt(roleElList[i].value)-1])
             if (roleElList[i].value == 1) {
                 heroElList[i].innerHTML += list.tank[hero]
             } else if (roleElList[i].value == 2) {
@@ -247,17 +269,7 @@ nextroundButton.addEventListener("click", () => {
                 heroElList[i].innerHTML += list.support[hero]
             }
         }
-
-        if (heroList.includes(hero)) {
-            i--
-            continue
-        } else if (hasTwoTanks(heroList) && roleElList[i].value == 0 && hero < lenRoles[0]) {
-            i--
-            continue
-        } else {
-            heroList[i] = hero
-        }
-
+        
         const obj = giveObjectives(parseInt(roleElList[i].value), roleElList[i].value == 0 ? hero : -1)
         objTextList[i][0].innerHTML = obj[0]
         objTextList[i][1].innerHTML = obj[1]
