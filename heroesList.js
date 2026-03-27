@@ -1,0 +1,60 @@
+const list = {
+    tank: [
+        "Domina",
+        "D'va",
+        "Doomfist",
+        "Hazard",
+        "Rainha Junker",
+        "Mauga",
+        "Orisa",
+        "Ramattra",
+        "Reinhardt",
+        "Roadhog",
+        "Sigma",
+        "Winston",
+        "Wercking Ball",
+        "Zarya"
+    ],
+    damage: [
+        "Anran",
+        "Emre",
+        "Vendetta",
+        "Ashe",
+        "Bastion",
+        "Cassidy",
+        "Echo",
+        "Freja",
+        "Genji",
+        "Hanzo",
+        "Junkrat",
+        "Mei",
+        "Pharah",
+        "Reaper",
+        "Sojourn",
+        "Soldado: 76",
+        "Sombra",
+        "Symmetra",
+        "Torbjörn",
+        "Tracer",
+        "Venture",
+        "Widowmaker"
+    ],
+    support: [
+        "Jetpack Cat",
+        "Mizuki",
+        "Ana",
+        "Baptiste",
+        "Brigitte",
+        "Illari",
+        "Juno",
+        "Kiriko",
+        "Lifeweaver",
+        "lúcio",
+        "Mercy",
+        "Moira",
+        "Wuyang",
+        "Zenyatta"
+    ]
+}
+
+export default list

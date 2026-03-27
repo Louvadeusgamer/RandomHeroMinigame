@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --off-color: #800000;
+            --openqueue-color: #ff70ff;
+            --tank-color: #70ff70;
+            --damage-color: #70ffff;
+            --support-color: #ff7070;
+        }
+
+        th, td {
+            border: 1px solid;
+            padding: 7px;
+            border-radius: 15px;
+        }
+        table {
+            margin: 10px 0;
+        }
+        select {
+            border: none;
+            outline: none;
+            background-color: #0000;
+            height: 75px;
+        }
+        input {
+            border-width: 0 0 1px 0;
+            border-radius: 0 0 15px 15px;
+            outline: none;
+            padding: 5px;
+            background-color: #0000;
+        }
+        select:disabled {
+            color: black;
+        }
+
+        button#start {
+            padding: 10px;
+            border: none;
+            background-color: #00dd00;
+            border-radius: 25px;
+        }
+        button#start:disabled {
+            display: none;
+        }
+        button#finishround {
+            padding: 10px;
+            border: none;
+            background-color: yellowgreen;
+            border-radius: 25px 0 0 25px;
+        }
+        button#finishround:disabled {
+            margin: 0 -6px;
+            padding: 10px;
+            border: none;
+            background-color: gray;
+            border-radius: 25px 0 0 25px;
+        }
+        button#nextround {
+            margin: 0 -6px;
+            padding: 10px;
+            border: none;
+            background-color: greenyellow;
+            border-radius: 0 25px 25px 0;
+        }
+        button#nextround:disabled {
+            margin: 0 -6px;
+            padding: 10px;
+            border: none;
+            background-color: gray;
+            border-radius: 0 25px 25px 0;
+        }
+        button#clean {
+            padding: 10px;
+            border: none;
+            background-color: red;
+            border-radius: 25px 0 0 25px;
+        }
+        button#uncheckpotg {
+            margin: 0 -6px;
+            padding: 10px;
+            border: none;
+            background-color: red;
+            border-radius: 0 25px 25px 0;
+        }
+
+        .principal {
+            color: gold;
+            font-weight: bold;
+        }
+
+        input[name="potg"] {
+            transform: scale(2);
+        }
+        
+        .off {
+            background-color: var(--off-color);
+        }
+        .open-queue {
+            background-color: var(--openqueue-color);
+        }
+        .tank {
+            background-color: var(--tank-color);
+        }
+        .damage {
+            background-color: var(--damage-color);
+        }
+        .support {
+            background-color: var(--support-color);
+        }
+    </style>
+</head>
+<body>
+    <h1>Overwatch - Heroes randomizer minigame</h1>
+    <h2>Match: <span id="match">0</span></h2>
+    <p>Match type:</p>
+    <form>
+        <input type="radio" name="type" id="type0" value="0" checked> Custom <br>
+        <input type="radio" name="type" id="type1" value="1"> Function Queue <br>
+        <input type="radio" name="type" id="type2" value="2"> Open Queue <br>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Position</th> <th>Role</th> <th>Player</th> <th>Points</th> <th>Hero</th> <th>objectives</th> <th>PotG</th>
+            </tr>
+        </thead>
+        <tdody>
+            <!-- Player 0 -->
+            <tr id="box0" class="off">
+                <td>
+                    <span id="pos0">-</span>
+                </td>
+                
+                <td>
+                    <select id="role0">
+                        <option value="-1">Off</option>
+                        <option value="0">Open Queue</option>
+                        <option value="1">Tank</option>
+                        <option value="2">Damage</option>
+                        <option value="3">Support</option>
+                    </select>
+                </td>
+                
+                <td>
+                    <input type="text" id="player0">
+                </td>
+                
+                <td>
+                    <span id="points0">0</span>
+                </td>
+                
+                <td>
+                    <span id="hero0"></span>
+                </td>
+                
+                <td>
+                    <input type="checkbox" id="objective000"><span id="objective001">obj1</span><br>
+                    <input type="checkbox" id="objective010"><span id="objective011">obj2</span><br>
+                    <input type="checkbox" id="objective020"><span id="objective021">obj3</span>
+                </td>
+                
+                <td>
+                    <input type="radio" name="potg" id="potg0" class="potg">
+                </td>
+            </tr>
+            
+            <!-- Player 1 -->
+            <tr id="box1" class="off">
+                <td>
+                    <span id="pos1">-</span>
+                </td>
+                <td>
+                    <select id="role1">
+                        <option value="-1">Off</option>
+                        <option value="0">Open Queue</option>
+                        <option value="1">Tank</option>
+                        <option value="2">Damage</option>
+                        <option value="3">Support</option>
+                    </select>
+                </td>
+                
+                <td>
+                    <input type="text" id="player1">
+                </td>
+                
+                <td>
+                    <span id="points1">0</span>
+                </td>
+                
+                <td>
+                    <span id="hero1"></span>
+                </td>
+                
+                <td>
+                    <input type="checkbox" id="objective100"><span id="objective101">obj1</span><br>
+                    <input type="checkbox" id="objective110"><span id="objective111">obj2</span><br>
+                    <input type="checkbox" id="objective120"><span id="objective121">obj3</span>
+                </td>
+                
+                <td>
+                    <input type="radio" name="potg" id="potg1" class="potg">
+                </td>
+            </tr>
+            
+            <!-- Player 2 -->
+            <tr id="box2" class="off">
+                <td>
+                    <span id="pos2">-</span>
+                </td>
+                <td>
+                    <select id="role2">
+                        <option value="-1">Off</option>
+                        <option value="0">Open Queue</option>
+                        <option value="1">Tank</option>
+                        <option value="2">Damage</option>
+                        <option value="3">Support</option>
+                    </select>
+                </td>
+                
+                <td>
+                    <input type="text" id="player2">
+                </td>
+                
+                <td>
+                    <span id="points2">0</span>
+                </td>
+                
+                <td>
+                    <span id="hero2"></span>
+                </td>
+                
+                <td>
+                    <input type="checkbox" id="objective200"><span id="objective201">obj1</span><br>
+                    <input type="checkbox" id="objective210"><span id="objective211">obj2</span><br>
+                    <input type="checkbox" id="objective220"><span id="objective221">obj3</span>
+                </td>
+                
+                <td>
+                    <input type="radio" name="potg" id="potg2" class="potg">
+                </td>
+            </tr>
+            
+            <!-- player 3 -->
+            <tr id="box3" class="off">
+                <td>
+                    <span id="pos3">-</span>
+                </td>
+                <td>
+                    <select id="role3">
+                        <option value="-1">Off</option>
+                        <option value="0">Open Queue</option>
+                        <option value="1">Tank</option>
+                        <option value="2">Damage</option>
+                        <option value="3">Support</option>
+                    </select>
+                </td>
+                
+                <td>
+                    <input type="text" id="player3">
+                </td>
+                
+                <td>
+                    <span id="points3">0</span>
+                </td>
+                
+                <td>
+                    <span id="hero3"></span>
+                </td>
+                
+                <td>
+                    <input type="checkbox" id="objective300"><span id="objective301">obj1</span><br>
+                    <input type="checkbox" id="objective310"><span id="objective311">obj2</span><br>
+                    <input type="checkbox" id="objective320"><span id="objective321">obj3</span>
+                </td>
+                
+                <td>
+                    <input type="radio" name="potg" id="potg3" class="potg">
+                </td>
+            </tr>
+            
+            <!-- Player 4 -->
+            <tr id="box4" class="off">
+                <td>
+                    <span id="pos4">-</span>
+                </td>
+                <td>
+                    <select id="role4">
+                        <option value="-1">Off</option>
+                        <option value="0">Open Queue</option>
+                        <option value="1">Tank</option>
+                        <option value="2">Damage</option>
+                        <option value="3">Support</option>
+                    </select>
+                </td>
+                
+                <td>
+                    <input type="text" id="player4">
+                </td>
+                
+                <td>
+                    <span id="points4">0</span>
+                </td>
+                
+                <td>
+                    <span id="hero4"></span>
+                </td>
+                
+                <td>
+                    <input type="checkbox" id="objective400"><span id="objective401">obj1</span><br>
+                    <input type="checkbox" id="objective410"><span id="objective411">obj2</span><br>
+                    <input type="checkbox" id="objective420"><span id="objective421">obj3</span>
+                </td>
+                
+                <td>
+                    <input type="radio" name="potg" id="potg4" class="potg">
+                </td>
+                
+            </tr>
+            
+            <!-- Player 5 -->
+            <tr id="box5" class="off">
+                <td>
+                    <span id="pos5">-</span>
+                </td>
+                <td>
+                    <select id="role5">
+                        <option value="-1">Off</option>
+                        <option value="0">Open Queue</option>
+                        <option value="1">Tank</option>
+                        <option value="2">Damage</option>
+                        <option value="3">Support</option>
+                    </select>
+                </td>
+
+                <td>
+                    <input type="text" id="player5">
+                </td>
+
+                <td>
+                    <span id="points5">0</span>
+                </td>
+
+                <td>
+                    <span id="hero5"></span>
+                </td>
+
+                <td>
+                    <input type="checkbox" id="objective500"><span id="objective501">obj1</span><br>
+                    <input type="checkbox" id="objective510"><span id="objective511">obj2</span><br>
+                    <input type="checkbox" id="objective520"><span id="objective521">obj3</span>
+                </td>
+
+                <td>
+                    <input type="radio" name="potg" id="potg5" class="potg">
+                </td>
+            </tr>
+        </tdody>
+    </table>
+    <button id="start">Start</button>
+    <button id="finishround" style="display: none">Finish round</button>
+    <button id="nextround" disabled style="display: none;">Next round</button>
+    <br>
+    <button id="clean">Clean game</button>
+    <button id="uncheckpotg">Clean PotG marks</button>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
