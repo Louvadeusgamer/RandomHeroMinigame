@@ -241,21 +241,16 @@ nextroundButton.addEventListener("click", () => {
             hero = Math.floor(Math.random() * (lenRoles[0] + lenRoles[1] + lenRoles[2]))
         else
             hero = Math.floor(Math.random() * lenRoles[parseInt(roleElList[i].value)-1])
-
         
-        console.log(`${i}: ${hero}`) // Arrumar herois repetidos no mesmo player
         
         if (heroList.includes(hero)) {
             i--
-            console.log("repeated")
             continue
         } else if (hasTwoTanks(heroList) && roleElList[i].value == 0 && hero < lenRoles[0]) {
             i--
-            console.log("has two tanks")
             continue
         } else {
             heroList[i] = hero
-            console.log("setted hero")
         }
         
         if (roleElList[i].value == 0) {
@@ -269,7 +264,7 @@ nextroundButton.addEventListener("click", () => {
                 heroElList[i].innerHTML += list.support[hero]
             }
         }
-        
+
         const obj = giveObjectives(parseInt(roleElList[i].value), roleElList[i].value == 0 ? hero : -1)
         objTextList[i][0].innerHTML = obj[0]
         objTextList[i][1].innerHTML = obj[1]
