@@ -6,13 +6,14 @@ const typeOfMatch = [
     document.getElementById("type2")
 ]
 const boxElList = []
-const positionElList = []
 const roleElList = []
 const playerElList = []
 const pointsElList = []
 const heroElList = []
 const objCBList = []
 const objTextList = []
+const rerollButtonList = []
+const rerollTextList = []
 const startButton = document.getElementById("start")
 const nextroundButton = document.getElementById("nextround")
 const finishroundButton = document.getElementById("finishround")
@@ -22,11 +23,12 @@ const cleanpotgButton = document.getElementById("uncheckpotg")
 const __setEls = () => {
     for (let i = 0; i <= 5; i++) {
         boxElList.push(document.getElementById(`box${i}`))
-        positionElList.push(document.getElementById(`pos${i}`))
         roleElList.push(document.getElementById(`role${i}`))
         playerElList.push(document.getElementById(`player${i}`))
         pointsElList.push(document.getElementById(`points${i}`))
         heroElList.push(document.getElementById(`hero${i}`))
+        rerollButtonList.push(document.getElementById(`rerollButton${i}`))
+        rerollTextList.push(document.getElementById(`rerollText${i}`))
         objCBList.push([])
         objTextList.push([])
         for (let e = 0; e <= 2; e++) {
@@ -39,7 +41,7 @@ __setEls()
 
 const changeBoxColor = (box) => {
     const i = parseInt(roleElList[box].value)
-    boxElList[box].classList = rolesTypes[i+1]
+    boxElList[box].classList = rolesTypes[i + 1]
 }
 const __giveTypesFunctions = () => {
     for (const type in typeOfMatch) {
@@ -50,7 +52,7 @@ const __giveTypesFunctions = () => {
                         roleElList[i].removeAttribute("disabled")
                         roleElList[i].value = "-1"
                         roleElList[i].dispatchEvent(new Event("change"))
-                    } catch(e) {}
+                    } catch (e) { }
                 }
             })
         } else if (type == 1) {
@@ -136,19 +138,19 @@ const giveObjectives = (roleN, heroNum) => {
             role = 3
         }
     }
-    
+
     if (role == 1) {
-        obj.push(`<span class="principal">Objetivo principal:</span> Mitigue ${Math.floor((Math.random() * (objTypes.tank.mit[1] - objTypes.tank.mit[0] + 1) + objTypes.tank.mit[0]) )* objTypes.tank.mit[2]} de dano.`)
-        obj.push(`Dê ${Math.floor((Math.random() * (objTypes.tank.dam[1] - objTypes.tank.dam[0] + 1) + objTypes.tank.dam[0]) )* objTypes.tank.mit[2]} de dano.`)
-        obj.push(`Elimine ${Math.floor((Math.random() * (objTypes.tank.kills[1] - objTypes.tank.kills[0] + 1) + objTypes.tank.kills[0]) )* objTypes.tank.kills[2]} inimigos.`)
+        obj.push(`<img src="img/icons/objMitigate.png" width="20px" class="blackIcon"> Mitigue: ${Math.floor((Math.random() * (objTypes.tank.mit[1] - objTypes.tank.mit[0] + 1) + objTypes.tank.mit[0])) * objTypes.tank.mit[2]}`)
+        obj.push(`<img src="img/icons/objDamage.png" width="20px" class="blackIcon"> Dano: ${Math.floor((Math.random() * (objTypes.tank.dam[1] - objTypes.tank.dam[0] + 1) + objTypes.tank.dam[0])) * objTypes.tank.mit[2]}`)
+        obj.push(`<img src="img/icons/objKill.png" width="20px" class="blackIcon"> Elimine: ${Math.floor((Math.random() * (objTypes.tank.kills[1] - objTypes.tank.kills[0] + 1) + objTypes.tank.kills[0])) * objTypes.tank.kills[2]}`)
     } else if (role == 2) {
-        obj.push(`<span class="principal">Objetivo principal:</span> Dê ${Math.floor((Math.random() * (objTypes.damage.dam[1] - objTypes.damage.dam[0] + 1) + objTypes.damage.dam[0]) )* objTypes.damage.dam[2]} de dano.`)
-        obj.push(`Elimine ${Math.floor((Math.random() * (objTypes.damage.kills[1] - objTypes.damage.kills[0] + 1) + objTypes.damage.kills[0]) )* objTypes.damage.kills[2]} inimigos.`)
-        obj.push(`Morra menos de ${Math.floor((Math.random() * (objTypes.damage.mindeath[1] - objTypes.damage.mindeath[0] + 1) + objTypes.damage.mindeath[0]) )* objTypes.damage.mindeath[2]} vezes.`)
+        obj.push(`<img src="img/icons/objDamage.png" width="20px" class="blackIcon"> Dano: ${Math.floor((Math.random() * (objTypes.damage.dam[1] - objTypes.damage.dam[0] + 1) + objTypes.damage.dam[0])) * objTypes.damage.dam[2]}`)
+        obj.push(`<img src="img/icons/objKill.png" width="20px" class="blackIcon"> Elimine: ${Math.floor((Math.random() * (objTypes.damage.kills[1] - objTypes.damage.kills[0] + 1) + objTypes.damage.kills[0])) * objTypes.damage.kills[2]}`)
+        obj.push(`<img src="img/icons/objDeath.png" width="20px" class="blackIcon"> Morra menos de: ${Math.floor((Math.random() * (objTypes.damage.mindeath[1] - objTypes.damage.mindeath[0] + 1) + objTypes.damage.mindeath[0])) * objTypes.damage.mindeath[2]}`)
     } else if (role == 3) {
-        obj.push(`<span class="principal">Objetivo principal:</span> Cure ${Math.floor((Math.random() * (objTypes.support.heal[1] - objTypes.support.heal[0] + 1) + objTypes.support.heal[0]) )* objTypes.support.heal[2]} de vida.`)
-        obj.push(`Dê ${Math.floor((Math.random() * (objTypes.support.assist[1] - objTypes.support.assist[0] + 1) + objTypes.support.assist[0]) )* objTypes.support.assist[2]} assistências.`)
-        obj.push(`Dê ${Math.floor((Math.random() * (objTypes.support.dam[1] - objTypes.support.dam[0] + 1) + objTypes.support.dam[0]) )* objTypes.support.dam[2]} de dano.`)
+        obj.push(`<img src="img/icons/objHeal.png" width="20px" class="blackIcon"> Cure: ${Math.floor((Math.random() * (objTypes.support.heal[1] - objTypes.support.heal[0] + 1) + objTypes.support.heal[0])) * objTypes.support.heal[2]}`)
+        obj.push(`<img src="img/icons/objAssist.png" width="20px" class="blackIcon"> Assistência: ${Math.floor((Math.random() * (objTypes.support.assist[1] - objTypes.support.assist[0] + 1) + objTypes.support.assist[0])) * objTypes.support.assist[2]}`)
+        obj.push(`<img src="img/icons/objDamage.png" width="20px" class="blackIcon"> Dano: ${Math.floor((Math.random() * (objTypes.support.dam[1] - objTypes.support.dam[0] + 1) + objTypes.support.dam[0])) * objTypes.support.dam[2]}`)
     }
     return obj
 }
@@ -156,6 +158,8 @@ const giveObjectives = (roleN, heroNum) => {
 let match = 0
 const points = [0, 0, 0, 0, 0, 0]
 const pos = [-1, -1, -1, -1, -1, -1] // if pos == -1: role = off
+let heroList = [-1, -1, -1, -1, -1, -1]
+const rerolls = [0, 0, 0, 0, 0, 0]
 
 const setPositions = () => {
     for (let i = 0; i <= 5; i++) pos[i] = 0
@@ -175,9 +179,54 @@ for (let i = 0; i <= 5; i++) {
     roleElList[i].addEventListener("change", () => {
         changeBoxColor(i)
     })
+    rerollButtonList[i].addEventListener("click", () => {
+        if (rerolls[i] > 0) {
+            rerolls[i]--
+            rerollTextList[i].innerHTML = rerolls[i]
+            for (let e = 0; e < 1; e++) {
+    
+    
+                let hero
+    
+                if (roleElList[i].value == -1 || playerElList[i].value == "")
+                    return
+                if (roleElList[i].value == 0)
+                    hero = Math.floor(Math.random() * (lenRoles[0] + lenRoles[1] + lenRoles[2]))
+                else
+                    hero = Math.floor(Math.random() * lenRoles[parseInt(roleElList[i].value) - 1])
+    
+    
+                if (heroList.includes(hero)) {
+                    e--
+                    continue
+                } else if (hasTwoTanks(heroList) && roleElList[i].value == 0 && hero < lenRoles[0]) {
+                    e--
+                    continue
+                } else {
+                    heroList[i] = hero
+                }
+    
+                if (roleElList[i].value == 0) {
+                    heroElList[i].innerHTML = `<img src="img/icons/${findHeroOQ(hero)}.png" width="32px"> ${findHeroOQ(hero)}`
+                } else {
+                    if (roleElList[i].value == 1) {
+                        heroElList[i].innerHTML = `<img src="img/icons/${list.tank[hero]}.png" width="32px"> ${list.tank[hero]}`
+                    } else if (roleElList[i].value == 2) {
+                        heroElList[i].innerHTML = `<img src="img/icons/${list.damage[hero]}.png" width="32px"> ${list.damage[hero]}`
+                    } else if (roleElList[i].value == 3) {
+                        heroElList[i].innerHTML = `<img src="img/icons/${list.support[hero]}.png" width="32px"> ${list.support[hero]}`
+                    }
+                }
+    
+                const obj = giveObjectives(parseInt(roleElList[i].value), roleElList[i].value == 0 ? hero : -1)
+                objTextList[i][0].innerHTML = obj[0]
+                objTextList[i][1].innerHTML = obj[1]
+                objTextList[i][2].innerHTML = obj[2]
+    
+            }
+        }
+    })
 }
-
-console.log(lenRoles[0])
 
 const hasTwoTanks = (heroes) => {
     let tankQuantity = 0
@@ -230,19 +279,19 @@ finishroundButton.addEventListener("click", () => {
 nextroundButton.addEventListener("click", () => {
     match++
     matchEl.innerHTML = match
-    const heroList = [-1, -1, -1, -1, -1, -1]
+    for (let i = 0; i <= 5; i++) heroList[i] = -1
     for (let i = 0; i <= 5; i++) {
-        
+
         let hero
 
         if (roleElList[i].value == -1 || playerElList[i].value == "")
             continue
-        if (roleElList[i].value == 0) 
+        if (roleElList[i].value == 0)
             hero = Math.floor(Math.random() * (lenRoles[0] + lenRoles[1] + lenRoles[2]))
         else
-            hero = Math.floor(Math.random() * lenRoles[parseInt(roleElList[i].value)-1])
-        
-        
+            hero = Math.floor(Math.random() * lenRoles[parseInt(roleElList[i].value) - 1])
+
+
         if (heroList.includes(hero)) {
             i--
             continue
@@ -252,16 +301,16 @@ nextroundButton.addEventListener("click", () => {
         } else {
             heroList[i] = hero
         }
-        
+
         if (roleElList[i].value == 0) {
-            heroElList[i].innerHTML += findHeroOQ(hero)
+            heroElList[i].innerHTML += `<img src="img/icons/${findHeroOQ(hero)}.png" width="32px"> ${findHeroOQ(hero)}`
         } else {
             if (roleElList[i].value == 1) {
-                heroElList[i].innerHTML += list.tank[hero]
+                heroElList[i].innerHTML += `<img src="img/icons/${list.tank[hero]}.png" width="32px"> ${list.tank[hero]}`
             } else if (roleElList[i].value == 2) {
-                heroElList[i].innerHTML += list.damage[hero]
+                heroElList[i].innerHTML += `<img src="img/icons/${list.damage[hero]}.png" width="32px"> ${list.damage[hero]}`
             } else if (roleElList[i].value == 3) {
-                heroElList[i].innerHTML += list.support[hero]
+                heroElList[i].innerHTML += `<img src="img/icons/${list.support[hero]}.png" width="32px"> ${list.support[hero]}`
             }
         }
 
@@ -276,16 +325,18 @@ nextroundButton.addEventListener("click", () => {
 })
 
 startButton.addEventListener("click", () => {
-    const heroList = [-1, -1, -1, -1, -1, -1]
+    for (let i = 0; i <= 5; i++) heroList[i] = -1
     match++
     matchEl.innerHTML = match
     finishroundButton.style.display = "initial"
     nextroundButton.style.display = "initial"
     for (let i = 0; i <= 5; i++) {
-        
+
         const potg = document.getElementById(`potg${i}`)
-        
+
         pointsElList[i].innerHTML = points[i]
+        rerolls[i] = 3
+        rerollTextList[i].innerHTML = rerolls[i]
         heroElList[i].innerHTML = ""
         objTextList[i][0].innerHTML = ""
         objTextList[i][1].innerHTML = ""
@@ -294,24 +345,17 @@ startButton.addEventListener("click", () => {
         objCBList[i][1].checked = false
         objCBList[i][2].checked = false
         potg.checked = false
+
         let hero
 
-        if (roleElList[i].value == -1 || playerElList[i].value == "") {
+        if (roleElList[i].value == -1 || playerElList[i].value == "")
             continue
-        } else if (roleElList[i].value == 0) {
+        if (roleElList[i].value == 0)
             hero = Math.floor(Math.random() * (lenRoles[0] + lenRoles[1] + lenRoles[2]))
-            heroElList[i].innerHTML += findHeroOQ(hero)
-        } else {
-            hero = Math.floor(Math.random() * lenRoles[parseInt(roleElList[i].value)-1])
-            if (roleElList[i].value == 1) {
-                heroElList[i].innerHTML += list.tank[hero]
-            } else if (roleElList[i].value == 2) {
-                heroElList[i].innerHTML += list.damage[hero]
-            } else if (roleElList[i].value == 3) {
-                heroElList[i].innerHTML += list.support[hero]
-            }
-        }
-        
+        else
+            hero = Math.floor(Math.random() * lenRoles[parseInt(roleElList[i].value) - 1])
+
+
         if (heroList.includes(hero)) {
             i--
             continue
@@ -320,6 +364,20 @@ startButton.addEventListener("click", () => {
             continue
         } else {
             heroList[i] = hero
+        }
+
+        if (roleElList[i].value == -1 || playerElList[i].value == "") {
+            continue
+        } else if (roleElList[i].value == 0) {
+            heroElList[i].innerHTML += `<img src="img/icons/${findHeroOQ(hero)}.png" width="32px"> ${findHeroOQ(hero)}`
+        } else {
+            if (roleElList[i].value == 1) {
+                heroElList[i].innerHTML += `<img src="img/icons/${list.tank[hero]}.png" width="32px"> ${list.tank[hero]}`
+            } else if (roleElList[i].value == 2) {
+                heroElList[i].innerHTML += `<img src="img/icons/${list.damage[hero]}.png" width="32px"> ${list.damage[hero]}`
+            } else if (roleElList[i].value == 3) {
+                heroElList[i].innerHTML += `<img src="img/icons/${list.support[hero]}.png" width="32px"> ${list.support[hero]}`
+            }
         }
 
         const obj = giveObjectives(parseInt(roleElList[i].value), roleElList[i].value == 0 ? hero : -1)
