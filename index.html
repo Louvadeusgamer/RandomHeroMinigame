@@ -5,12 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        @font-face {
+            font-family: zekton;
+            src: url(font/zekton/Zekton\ Rg.otf);
+        }
+
+        * {
+            font-family: zekton;
+        }
+
+        body {
+            background-color: #777777;
+        }
+
         :root {
             --off-color: #800000;
-            --openqueue-color: #ff70ff;
-            --tank-color: #70ff70;
-            --damage-color: #70ffff;
-            --support-color: #ff7070;
+            --openqueue-color: #b050b0;
+            --tank-color: #ffc050;
+            --damage-color: #ff7070;
+            --support-color: #50a050;
+        }
+
+        .blackIcon {
+            filter: invert(100%);
         }
 
         th, td {
@@ -33,6 +50,12 @@
             outline: none;
             padding: 5px;
             background-color: #0000;
+        }
+        table {
+            text-align: center;
+        }
+        td {
+            line-height: 100%;
         }
         select:disabled {
             color: black;
@@ -87,6 +110,9 @@
             background-color: red;
             border-radius: 0 25px 25px 0;
         }
+        button.reroll {
+            border: 0;
+        }
 
         .principal {
             color: gold;
@@ -115,34 +141,31 @@
     </style>
 </head>
 <body>
-    <h1>Overwatch - Heroes randomizer minigame</h1>
-    <h2>Match: <span id="match">0</span></h2>
-    <p>Match type:</p>
+    <h1>Overwatch - Minigame de heróis aleatórios</h1>
+    <h2>Partida: <span id="match">0</span></h2>
+    <span>Tipo de partida:</span><br>
     <form>
-        <input type="radio" name="type" id="type0" value="0" checked> Custom <br>
-        <input type="radio" name="type" id="type1" value="1"> Function Queue <br>
-        <input type="radio" name="type" id="type2" value="2"> Open Queue <br>
+        <input type="radio" name="type" id="type0" value="0" checked> <label for="type0">Customizado</label>  <br>
+        <input type="radio" name="type" id="type1" value="1"> <label for="type1">Fila por função</label>  <br>
+        <input type="radio" name="type" id="type2" value="2"> <label for="type2">Fila Aberta</label>  <br>
     </form>
     <table>
         <thead>
             <tr>
-                <th>Position</th> <th>Role</th> <th>Player</th> <th>Points</th> <th>Hero</th> <th>objectives</th> <th>PotG</th>
+                <th>Função</th> <th>Jogador</th> <th>Pontos</th> <th>Herói</th> <th>Objetivos</th> <th>JdP</th> <th>Trocar Herói</th>
             </tr>
         </thead>
         <tdody>
             <!-- Player 0 -->
             <tr id="box0" class="off">
-                <td>
-                    <span id="pos0">-</span>
-                </td>
                 
                 <td>
                     <select id="role0">
-                        <option value="-1">Off</option>
-                        <option value="0">Open Queue</option>
-                        <option value="1">Tank</option>
-                        <option value="2">Damage</option>
-                        <option value="3">Support</option>
+                        <option value="-1">Fora</option>
+                        <option value="0">Fila Aberta</option>
+                        <option value="1">Tanque</option>
+                        <option value="2">Dano</option>
+                        <option value="3">Suporte</option>
                     </select>
                 </td>
                 
@@ -159,28 +182,31 @@
                 </td>
                 
                 <td>
-                    <input type="checkbox" id="objective000"><span id="objective001">obj1</span><br>
-                    <input type="checkbox" id="objective010"><span id="objective011">obj2</span><br>
-                    <input type="checkbox" id="objective020"><span id="objective021">obj3</span>
+                    <input type="checkbox" id="objective000"><label for=""objective000" id="objective001"></label><br>
+                    <input type="checkbox" id="objective010"><label for=""objective010" id="objective011"></label><br>
+                    <input type="checkbox" id="objective020"><label for=""objective020" id="objective021"></label>
                 </td>
                 
                 <td>
                     <input type="radio" name="potg" id="potg0" class="potg">
                 </td>
+
+                <td>
+                    <button id="rerollButton0" class="reroll">Usos: <span id="rerollText0"></span></button>
+                </td>
             </tr>
             
             <!-- Player 1 -->
             <tr id="box1" class="off">
-                <td>
-                    <span id="pos1">-</span>
-                </td>
+                
+
                 <td>
                     <select id="role1">
-                        <option value="-1">Off</option>
-                        <option value="0">Open Queue</option>
-                        <option value="1">Tank</option>
-                        <option value="2">Damage</option>
-                        <option value="3">Support</option>
+                        <option value="-1">Fora</option>
+                        <option value="0">Fila Aberta</option>
+                        <option value="1">Tanque</option>
+                        <option value="2">Dano</option>
+                        <option value="3">Suporte</option>
                     </select>
                 </td>
                 
@@ -197,28 +223,30 @@
                 </td>
                 
                 <td>
-                    <input type="checkbox" id="objective100"><span id="objective101">obj1</span><br>
-                    <input type="checkbox" id="objective110"><span id="objective111">obj2</span><br>
-                    <input type="checkbox" id="objective120"><span id="objective121">obj3</span>
+                    <input type="checkbox" id="objective100"><label for=""objective100" id="objective101"></label><br>
+                    <input type="checkbox" id="objective110"><label for=""objective110" id="objective111"></label><br>
+                    <input type="checkbox" id="objective120"><label for=""objective120" id="objective121"></label>
                 </td>
                 
                 <td>
                     <input type="radio" name="potg" id="potg1" class="potg">
                 </td>
+
+                <td>
+                    <button id="rerollButton1" class="reroll">Usos: <span id="rerollText1"></span></button>
+                </td>
             </tr>
             
             <!-- Player 2 -->
             <tr id="box2" class="off">
-                <td>
-                    <span id="pos2">-</span>
-                </td>
+                
                 <td>
                     <select id="role2">
-                        <option value="-1">Off</option>
-                        <option value="0">Open Queue</option>
-                        <option value="1">Tank</option>
-                        <option value="2">Damage</option>
-                        <option value="3">Support</option>
+                        <option value="-1">Fora</option>
+                        <option value="0">Fila Aberta</option>
+                        <option value="1">Tanque</option>
+                        <option value="2">Dano</option>
+                        <option value="3">Suporte</option>
                     </select>
                 </td>
                 
@@ -235,28 +263,30 @@
                 </td>
                 
                 <td>
-                    <input type="checkbox" id="objective200"><span id="objective201">obj1</span><br>
-                    <input type="checkbox" id="objective210"><span id="objective211">obj2</span><br>
-                    <input type="checkbox" id="objective220"><span id="objective221">obj3</span>
+                    <input type="checkbox" id="objective200"><label for=""objective200" id="objective201"></label><br>
+                    <input type="checkbox" id="objective210"><label for=""objective210" id="objective211"></label><br>
+                    <input type="checkbox" id="objective220"><label for=""objective220" id="objective221"></label>
                 </td>
                 
                 <td>
                     <input type="radio" name="potg" id="potg2" class="potg">
                 </td>
+                
+                <td>
+                    <button id="rerollButton2" class="reroll">Usos: <span id="rerollText2"></span></button>
+                </td>
             </tr>
             
             <!-- player 3 -->
             <tr id="box3" class="off">
-                <td>
-                    <span id="pos3">-</span>
-                </td>
+                
                 <td>
                     <select id="role3">
-                        <option value="-1">Off</option>
-                        <option value="0">Open Queue</option>
-                        <option value="1">Tank</option>
-                        <option value="2">Damage</option>
-                        <option value="3">Support</option>
+                        <option value="-1">Fora</option>
+                        <option value="0">Fila Aberta</option>
+                        <option value="1">Tanque</option>
+                        <option value="2">Dano</option>
+                        <option value="3">Suporte</option>
                     </select>
                 </td>
                 
@@ -273,28 +303,30 @@
                 </td>
                 
                 <td>
-                    <input type="checkbox" id="objective300"><span id="objective301">obj1</span><br>
-                    <input type="checkbox" id="objective310"><span id="objective311">obj2</span><br>
-                    <input type="checkbox" id="objective320"><span id="objective321">obj3</span>
+                    <input type="checkbox" id="objective300"><label for=""objective300" id="objective301"></label><br>
+                    <input type="checkbox" id="objective310"><label for=""objective310" id="objective311"></label><br>
+                    <input type="checkbox" id="objective320"><label for=""objective320" id="objective321"></label>
                 </td>
                 
                 <td>
                     <input type="radio" name="potg" id="potg3" class="potg">
                 </td>
+                
+                <td>
+                    <button id="rerollButton3" class="reroll">Usos: <span id="rerollText3"></span></button>
+                </td>
             </tr>
             
             <!-- Player 4 -->
             <tr id="box4" class="off">
-                <td>
-                    <span id="pos4">-</span>
-                </td>
+                
                 <td>
                     <select id="role4">
-                        <option value="-1">Off</option>
-                        <option value="0">Open Queue</option>
-                        <option value="1">Tank</option>
-                        <option value="2">Damage</option>
-                        <option value="3">Support</option>
+                        <option value="-1">Fora</option>
+                        <option value="0">Fila Aberta</option>
+                        <option value="1">Tanque</option>
+                        <option value="2">Dano</option>
+                        <option value="3">Suporte</option>
                     </select>
                 </td>
                 
@@ -311,62 +343,67 @@
                 </td>
                 
                 <td>
-                    <input type="checkbox" id="objective400"><span id="objective401">obj1</span><br>
-                    <input type="checkbox" id="objective410"><span id="objective411">obj2</span><br>
-                    <input type="checkbox" id="objective420"><span id="objective421">obj3</span>
+                    <input type="checkbox" id="objective400"><label for=""objective400" id="objective401"></label><br>
+                    <input type="checkbox" id="objective410"><label for=""objective410" id="objective411"></label><br>
+                    <input type="checkbox" id="objective420"><label for=""objective420" id="objective421"></label>
                 </td>
                 
                 <td>
                     <input type="radio" name="potg" id="potg4" class="potg">
                 </td>
                 
+                <td>
+                    <button id="rerollButton4" class="reroll">Usos: <span id="rerollText4"></span></button>
+                </td>
             </tr>
             
             <!-- Player 5 -->
             <tr id="box5" class="off">
-                <td>
-                    <span id="pos5">-</span>
-                </td>
+                
                 <td>
                     <select id="role5">
-                        <option value="-1">Off</option>
-                        <option value="0">Open Queue</option>
-                        <option value="1">Tank</option>
-                        <option value="2">Damage</option>
-                        <option value="3">Support</option>
+                        <option value="-1">Fora</option>
+                        <option value="0">Fila Aberta</option>
+                        <option value="1">Tanque</option>
+                        <option value="2">Dano</option>
+                        <option value="3">Suporte</option>
                     </select>
                 </td>
-
+                
                 <td>
                     <input type="text" id="player5">
                 </td>
-
+                
                 <td>
                     <span id="points5">0</span>
                 </td>
-
+                
                 <td>
                     <span id="hero5"></span>
                 </td>
-
+                
                 <td>
-                    <input type="checkbox" id="objective500"><span id="objective501">obj1</span><br>
-                    <input type="checkbox" id="objective510"><span id="objective511">obj2</span><br>
-                    <input type="checkbox" id="objective520"><span id="objective521">obj3</span>
+                    <input type="checkbox" id="objective500"><label for=""objective500" id="objective501"></label><br>
+                    <input type="checkbox" id="objective510"><label for=""objective510" id="objective511"></label><br>
+                    <input type="checkbox" id="objective520"><label for=""objective520" id="objective521"></label>
+                </td>
+                
+                <td>
+                    <input type="radio" name="potg" id="potg5" class="potg">
                 </td>
 
                 <td>
-                    <input type="radio" name="potg" id="potg5" class="potg">
+                    <button id="rerollButton5" class="reroll">Usos: <span id="rerollText5"></span></button>
                 </td>
             </tr>
         </tdody>
     </table>
-    <button id="start">Start</button>
-    <button id="finishround" style="display: none">Finish round</button>
-    <button id="nextround" disabled style="display: none;">Next round</button>
+    <button id="start">Começar</button>
+    <button id="finishround" style="display: none">Terminar rodada</button>
+    <button id="nextround" disabled style="display: none;">Próxima rodada</button>
     <br>
-    <button id="clean">Clean game</button>
-    <button id="uncheckpotg">Clean PotG marks</button>
+    <button id="clean">Limpar jogo</button>
+    <button id="uncheckpotg">Limpar JdP</button>
     <script src="script.js" type="module"></script>
 </body>
 </html>
