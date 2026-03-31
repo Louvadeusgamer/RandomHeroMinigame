@@ -31,7 +31,7 @@ const list = {
         "Pharah",
         "Reaper",
         "Sojourn",
-        "Soldado: 76",
+        "Soldado 76",
         "Sombra",
         "Symmetra",
         "Torbjörn",
