@@ -12,7 +12,7 @@ const list = {
         "Roadhog",
         "Sigma",
         "Winston",
-        "Wercking Ball",
+        "Wrecking Ball",
         "Zarya"
     ],
     damage: [
@@ -49,7 +49,7 @@ const list = {
         "Juno",
         "Kiriko",
         "Lifeweaver",
-        "lúcio",
+        "Lúcio",
         "Mercy",
         "Moira",
         "Wuyang",
