@@ -30,6 +30,8 @@ const list = {
         "Mei",
         "Pharah",
         "Reaper",
+        "Shion",
+        "Sierra",
         "Sojourn",
         "Soldado 76",
         "Sombra",
