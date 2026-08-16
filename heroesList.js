@@ -2,6 +2,7 @@ const list = {
     tank: [
         "Domina",
         "D'va",
+        "D'mon",
         "Doomfist",
         "Hazard",
         "Rainha Junker",
